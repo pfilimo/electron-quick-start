@@ -1,22 +1,39 @@
 {
-  "name": "electron-quick-start",
+  "name": "electron-test-app",
   "version": "1.0.0",
   "description": "A minimal Electron application",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/pfilimo/electron-quick-start",
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "sandbox",
+    "electronjs"
   ],
-  "author": "GitHub",
+  "author": "pfilimo",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "~1.7.8"
-  }
+    "electron": "~1.7.8",
+    "electron-builder": "^19.47.1"
+  },
+  "build": {
+    "appId": "com.electron.${name}",
+    "win": {
+      "target": [
+        {
+          "target": "msi",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "postinstall": "electron-builder install-app-deps"
 }
