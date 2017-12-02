@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html>
-  <script>window.$ = window.jQuery = require('./jquery-3.2.1.min.js');</script>
+  <script>
+    window.$ = window.jQuery = require('./jquery-3.2.1.min.js');
+    let SerialPort = require('serialport');
+  </script>
   <head>
     <meta charset="UTF-8">
     <title>Hello World!</title>
+    <link rel="stylesheet" type="text/css" href="./main.css">
   </head>
   <body>
-    <h1 id="title1">Hello World!</h1>
     <!-- All of the Node.js APIs are available in this renderer process. -->
+    <!--
     We are using Node.js <script>document.write(process.versions.node)</script>,
     Chromium <script>document.write(process.versions.chrome)</script>,
     and Electron <script>document.write(process.versions.electron)</script>.
+    -->
+
+    <div id="outbar1" class="console_look"></div>
 
     <script>
       // You can also require other files to run in this process
@@ -22,6 +29,19 @@
   <script>
     $(document).ready(function(){
       $('#title1').css('color','#FF0000');
+      //let tmp = JSON.stringify({'aa':'123','bb':[4,5,6]}, null, 2);
+      $('#outbar1').text('initializing...');
+
+      SerialPort.list()
+      .then(
+        ports => {
+                    $('#outbar1').text('success\n\r' + JSON.stringify(ports, null, 2));
+                 },
+        err => {
+                    $('#outbar1').text('error');
+               }
+      );
+
     });
   </script>
 
