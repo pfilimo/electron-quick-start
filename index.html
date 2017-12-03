@@ -2,7 +2,8 @@
 <html>
   <script>
     window.$ = window.jQuery = require('./jquery-3.2.1.min.js');
-    let SerialPort = require('serialport');
+    const SerialPort = require('serialport');
+    const {Hello} = require('./build/Release/mycppaddon');
   </script>
   <head>
     <meta charset="UTF-8">
@@ -11,13 +12,62 @@
   </head>
   <body>
     <!-- All of the Node.js APIs are available in this renderer process. -->
-    <!--
+<!--
     We are using Node.js <script>document.write(process.versions.node)</script>,
     Chromium <script>document.write(process.versions.chrome)</script>,
     and Electron <script>document.write(process.versions.electron)</script>.
-    -->
+    <p>
+     process.version = <script>document.write(process.version)</script>
+    </p>
+    <p>
+     process.arch = <script>document.write(process.arch)</script>
+    </p>
+    <p>
+     MyCppAddon: <script>document.write(Hello())</script>
+    </p>
+-->
+
 
     <div id="outbar1" class="console_look"></div>
+
+
+    
+
+    <table>
+      <tr>
+        <td><a class="link_button1" href="" onclick="SetOffset('ax'); return false;">Задать смещение Ax</a></td>
+        <td><input id="ax_offs" type="text" /></td>
+      </tr>
+      <tr>
+        <td><a class="link_button1" href="" onclick="SetOffset('ay'); return false;">Задать смещение Ay</a></td>
+        <td><input id="ay_offs" type="text" /></td>
+      </tr>
+      <tr>
+        <td><a class="link_button1" href="" onclick="SetOffset('az'); return false;">Задать смещение Az</a></td>
+        <td><input id="az_offs" type="text" /></td>
+      </tr>
+      <tr>
+        <td><a class="link_button1" href="" onclick="SetOffset('gx'); return false;">Задать смещение Gx</a></td>
+        <td><input id="gx_offs" type="text" /></td>
+      </tr>
+      <tr>
+        <td><a class="link_button1" href="" onclick="SetOffset('gy'); return false;">Задать смещение Gy</a></td>
+        <td><input id="gy_offs" type="text" /></td>
+      </tr>
+      <tr>
+        <td><a class="link_button1" href="" onclick="SetOffset('gz'); return false;">Задать смещение Gz</a></td>
+        <td><input id="gz_offs" type="text" /></td>
+      </tr>
+    </table>
+
+
+
+
+
+
+
+
+
 
     <script>
       // You can also require other files to run in this process
@@ -27,6 +77,13 @@
 
 
   <script>
+
+    function SetOffset(axis) {
+      let offs = +$('#'+axis+'_offs').val() || 0;
+      $('#'+axis+'_offs').val( offs );
+    }
+
+
     $(document).ready(function(){
       $('#title1').css('color','#FF0000');
       //let tmp = JSON.stringify({'aa':'123','bb':[4,5,6]}, null, 2);
